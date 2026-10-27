@@ -1,0 +1,51 @@
+---
+import Contactform from "@/components/contactform.astro";
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title="ติดต่อเรา">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">ติดต่อ SEO Sidekick</Fragment>
+      <Fragment slot="desc">
+        มีคำแนะนำ แจ้งปัญหา หรือมีไอเดียเกี่ยวกับเครื่องมือ SEO บอกเราได้เลย
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-16">
+      <div>
+        <h2 class="font-medium text-2xl text-gray-800">
+          มีอะไรอยากบอกเรา?
+        </h2>
+
+        <p class="text-lg leading-relaxed text-slate-500 mt-3">
+          หากพบข้อผิดพลาดในการใช้งาน มีข้อมูลที่ควรแก้ไข
+          หรือมีไอเดียสำหรับเครื่องมือ SEO ใหม่ ๆ สามารถส่งข้อความหาเราได้
+        </p>
+
+        <div class="mt-6">
+          <div class="flex items-center mt-3 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:envelope" />
+            <a
+              href="mailto:hello@seosidekick.com"
+              class="hover:text-gray-900 transition">
+              hello@seosidekick.com
+            </a>
+          </div>
+
+          <div class="flex items-center mt-3 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:comment-alt" />
+            <span>ข้อเสนอแนะเกี่ยวกับเว็บไซต์และเครื่องมือ SEO</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <Contactform />
+      </div>
+    </div>
+  </Container>
+</Layout>

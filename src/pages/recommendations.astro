@@ -1,0 +1,107 @@
+---
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const recommendations = [
+  {
+    title: "สินเชื่อบ้าน",
+    description:
+      "รวมข้อมูลและบริการสินเชื่อสำหรับคนที่กำลังวางแผนกู้ซื้อบ้านหรือคอนโด",
+    icon: "bx:home",
+  },
+  {
+    title: "ประกันบ้านและคอนโด",
+    description:
+      "ตัวเลือกประกันที่ช่วยคุ้มครองบ้าน คอนโด และทรัพย์สินภายในที่อยู่อาศัย",
+    icon: "bx:shield",
+  },
+  {
+    title: "เฟอร์นิเจอร์และของใช้ในบ้าน",
+    description:
+      "ไอเทมที่น่าสนใจสำหรับคนที่กำลังแต่งบ้านหรือย้ายเข้าคอนโดใหม่",
+    icon: "bx:chair",
+  },
+  {
+    title: "เครื่องใช้ไฟฟ้า",
+    description:
+      "แนะนำเครื่องใช้ไฟฟ้าที่เหมาะกับบ้านและคอนโด พร้อมข้อมูลที่ช่วยประกอบการตัดสินใจ",
+    icon: "bx:tv",
+  },
+  {
+    title: "บริการเกี่ยวกับบ้าน",
+    description:
+      "รวมบริการที่อาจเป็นประโยชน์สำหรับเจ้าของบ้านและผู้พักอาศัย",
+    icon: "bx:wrench",
+  },
+  {
+    title: "บริการสำหรับคนกำลังย้ายบ้าน",
+    description:
+      "ตัวช่วยและบริการที่เกี่ยวข้องกับการย้ายเข้า ย้ายออก และจัดการบ้าน",
+    icon: "bx:car",
+  },
+];
+---
+
+<Layout title="คำแนะนำ">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">คำแนะนำสำหรับคนกำลังวางแผนเรื่องบ้าน</Fragment>
+      <Fragment slot="desc">
+        รวมสินค้า บริการ และตัวเลือกที่อาจเป็นประโยชน์สำหรับการซื้อ เช่า และดูแลบ้านหรือคอนโด
+      </Fragment>
+    </Sectionhead>
+
+    <div class="max-w-4xl mx-auto mt-16">
+      <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+        เลือกดูสิ่งที่คุณกำลังมองหา
+      </h2>
+
+      <p class="text-lg mt-4 text-slate-600 leading-relaxed">
+        เราคัดเลือกสินค้าและบริการที่เกี่ยวข้องกับการอยู่อาศัย
+        เพื่อช่วยให้คุณเปรียบเทียบและตัดสินใจก่อนเลือกซื้อได้ง่ายขึ้น
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+      {
+        recommendations.map((item) => (
+          <div class="flex gap-4 items-start">
+            <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
+              <Icon class="text-white" name={item.icon} />
+            </div>
+
+            <div>
+              <h3 class="font-semibold text-lg">
+                {item.title}
+              </h3>
+
+              <p class="text-slate-500 mt-2 leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="bg-black p-8 md:px-20 md:py-16 mt-20 mx-auto max-w-5xl rounded-lg flex flex-col items-center text-center">
+
+      <h2 class="text-white text-3xl md:text-5xl tracking-tight">
+        กำลังตัดสินใจซื้ออะไรอยู่?
+      </h2>
+
+      <p class="text-slate-400 mt-4 text-lg md:text-xl max-w-2xl leading-relaxed">
+        ลองใช้เครื่องมือของ BaanCal เพื่อช่วยวางแผนค่าใช้จ่ายก่อนตัดสินใจ
+      </p>
+
+      <a
+        href="/"
+        class="mt-7 bg-white text-black px-6 py-3 rounded-md hover:bg-gray-200 transition">
+        ดูเครื่องมือทั้งหมด
+      </a>
+    </div>
+  </Container>
+</Layout>

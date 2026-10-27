@@ -1,0 +1,136 @@
+---
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+<Layout title="Meta Description Generator">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">สร้าง Meta Description</Fragment>
+      <Fragment slot="desc">
+        ช่วยเขียน Meta Description สำหรับหน้าเว็บไซต์ให้น่าสนใจและเหมาะกับ SEO
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-16">
+      <div>
+        <h2 class="font-medium text-2xl text-gray-800">
+          ข้อมูลหน้าเว็บของคุณ
+        </h2>
+
+        <div class="mt-6 space-y-5">
+          <div>
+            <label for="topic" class="block text-sm font-medium text-gray-700 mb-2">
+              เนื้อหาหรือหัวข้อของหน้าเว็บ
+            </label>
+            <textarea
+              id="topic"
+              rows="5"
+              placeholder="เช่น วิธีเลือก Keyword สำหรับทำ SEO"
+              class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            ></textarea>
+          </div>
+
+          <div>
+            <label for="keyword" class="block text-sm font-medium text-gray-700 mb-2">
+              Keyword หลัก
+            </label>
+            <input
+              id="keyword"
+              type="text"
+              placeholder="เช่น วิธีทำ SEO"
+              class="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            />
+          </div>
+
+          <div>
+            <label for="tone" class="block text-sm font-medium text-gray-700 mb-2">
+              รูปแบบข้อความ
+            </label>
+            <select
+              id="tone"
+              class="w-full px-4 py-3 rounded-md border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-gray-400">
+              <option value="normal">ทั่วไป</option>
+              <option value="professional">เป็นทางการ</option>
+              <option value="friendly">เป็นกันเอง</option>
+            </select>
+          </div>
+
+          <button
+            id="generate"
+            class="w-full px-5 py-3 rounded-md bg-black text-white hover:bg-gray-800 transition">
+            สร้าง Meta Description
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <div class="bg-gray-50 rounded-lg p-8">
+          <h2 class="font-medium text-2xl text-gray-800">
+            ผลลัพธ์
+          </h2>
+
+          <div class="mt-6">
+            <p class="text-gray-500">Meta Description</p>
+            <p
+              id="descriptionResult"
+              class="text-lg leading-relaxed text-gray-800 mt-2">
+              -
+            </p>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-gray-200">
+            <div class="flex items-center justify-between">
+              <p class="text-gray-500">จำนวนตัวอักษร</p>
+              <p id="characterCount" class="font-semibold text-gray-800">
+                0 / 160
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</Layout>
+
+<script>
+  const topicInput = document.querySelector("#topic") as HTMLTextAreaElement;
+  const keywordInput = document.querySelector("#keyword") as HTMLInputElement;
+  const toneInput = document.querySelector("#tone") as HTMLSelectElement;
+
+  const generateButton = document.querySelector("#generate");
+  const descriptionResult = document.querySelector("#descriptionResult");
+  const characterCount = document.querySelector("#characterCount");
+
+  generateButton?.addEventListener("click", () => {
+    const topic = topicInput.value.trim();
+    const keyword = keywordInput.value.trim();
+    const tone = toneInput.value;
+
+    if (!topic) {
+      descriptionResult!.textContent =
+        "กรุณากรอกเนื้อหาหรือหัวข้อของหน้าเว็บ";
+      characterCount!.textContent = "0 / 160";
+      return;
+    }
+
+    let description = "";
+
+    if (tone === "professional") {
+      description = keyword
+        ? `เรียนรู้${topic} พร้อมข้อมูลเกี่ยวกับ ${keyword} เพื่อช่วยให้คุณเข้าใจและนำไปใช้งานได้อย่างเหมาะสม`
+        : `เรียนรู้${topic} พร้อมข้อมูลและรายละเอียดที่สำคัญ เพื่อช่วยให้คุณเข้าใจและนำไปใช้งานได้อย่างเหมาะสม`;
+    } else if (tone === "friendly") {
+      description = keyword
+        ? `อยากรู้เรื่อง${topic}? มาดูข้อมูลเกี่ยวกับ ${keyword} พร้อมคำแนะนำที่เข้าใจง่ายและนำไปใช้ได้จริง`
+        : `อยากรู้เรื่อง${topic}? รวมข้อมูลและคำแนะนำที่เข้าใจง่าย ช่วยให้คุณนำไปใช้ได้จริง`;
+    } else {
+      description = keyword
+        ? `เรียนรู้${topic} พร้อมข้อมูลเกี่ยวกับ ${keyword} และคำแนะนำที่ช่วยให้คุณนำไปใช้ได้อย่างมีประสิทธิภาพ`
+        : `เรียนรู้${topic} พร้อมข้อมูลและคำแนะนำที่ช่วยให้คุณเข้าใจเรื่องนี้ได้ง่ายขึ้น`;
+    }
+
+    descriptionResult!.textContent = description;
+    characterCount!.textContent = `${description.length} / 160`;
+  });
+</script>

@@ -1,0 +1,43 @@
+---
+const {
+  position = "default",
+  image = "",
+  link = "#",
+  alt = "โฆษณา",
+} = Astro.props;
+---
+
+<div class="w-full my-8 flex justify-center">
+  {
+    image ? (
+      <a
+        href={link}
+        target="_blank"
+        rel="nofollow sponsored noopener"
+        class="block w-full max-w-4xl overflow-hidden rounded-lg hover:opacity-95 transition"
+      >
+        <img
+          src={image}
+          alt={alt}
+          class="w-full h-auto object-cover"
+        />
+      </a>
+    ) : (
+      <div
+        class="w-full max-w-4xl min-h-[120px] md:min-h-[180px] border border-gray-200 bg-gray-50 rounded-lg flex flex-col items-center justify-center text-center px-6"
+      >
+        <span class="text-xs text-gray-400 uppercase tracking-wider">
+          Advertisement
+        </span>
+
+        <span class="text-sm text-gray-400 mt-2">
+          พื้นที่โฆษณา
+        </span>
+
+        <span class="text-xs text-gray-300 mt-1">
+          สนใจลงโฆษณากับ BaanCal
+        </span>
+      </div>
+    )
+  }
+</div>

@@ -1,0 +1,93 @@
+---
+import Container from "@/components/container.astro";
+import Sectionhead from "@/components/sectionhead.astro";
+import Layout from "@/layouts/Layout.astro";
+import Link from "@/components/ui/link.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title="ลงโฆษณากับ BaanCal">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">ลงโฆษณากับ BaanCal</Fragment>
+      <Fragment slot="desc">
+        เข้าถึงกลุ่มคนที่กำลังวางแผนซื้อ เช่า หรือหาข้อมูลเกี่ยวกับบ้านและคอนโด
+      </Fragment>
+    </Sectionhead>
+
+    <div class="max-w-4xl mx-auto mt-16">
+      <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
+        พื้นที่สำหรับธุรกิจที่เกี่ยวข้องกับบ้าน
+      </h2>
+
+      <p class="text-lg mt-4 text-slate-600 leading-relaxed">
+        BaanCal มุ่งเน้นเครื่องมือและข้อมูลสำหรับคนที่กำลังวางแผนซื้อ
+        เช่า หรือมีค่าใช้จ่ายเกี่ยวกับบ้านและคอนโด
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 max-w-4xl mx-auto mt-16 gap-12">
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name="uil:megaphone" />
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">
+            Banner Advertising
+          </h3>
+
+          <p class="text-slate-500 mt-2 leading-relaxed">
+            โปรโมตสินค้า บริการ หรือแบรนด์ผ่านพื้นที่โฆษณาบนเว็บไซต์
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name="uil:edit" />
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">
+            Sponsored Content
+          </h3>
+
+          <p class="text-slate-500 mt-2 leading-relaxed">
+            นำเสนอสินค้าและบริการผ่านบทความที่เกี่ยวข้องกับบ้านและคอนโด
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-black rounded-full p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name="uil:building" />
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-lg">
+            Featured Listing
+          </h3>
+
+          <p class="text-slate-500 mt-2 leading-relaxed">
+            โปรโมตโครงการบ้านหรือคอนโดให้โดดเด่นในตำแหน่งที่ผู้ใช้งานมองเห็นได้ง่าย
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+  class="bg-black p-8 md:px-20 md:py-20 mt-20 mx-auto max-w-5xl rounded-lg flex flex-col items-center text-center">
+  <h2 class="text-white text-4xl md:text-6xl tracking-tight">
+   สนใจลงโฆษณากับเรา
+  </h2>
+  <p class="text-slate-400 mt-4 text-lg md:text-xl">
+    ติดต่อเราเพื่อสอบถามรายละเอียด รูปแบบโฆษณา และแพ็กเกจที่เหมาะกับธุรกิจของคุณ
+  </p>
+  <div class="flex mt-5">
+    <Link href="#" style="inverted">ติดต่อ BaanCal</Link>
+  </div>
+</div>
+
+  </Container>
+</Layout>

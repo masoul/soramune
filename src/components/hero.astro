@@ -1,0 +1,271 @@
+---
+import { Picture } from "astro:assets";
+import heroImage from "@/assets/hero.jpeg";
+import Link from "@/components/ui/link.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<main class="grid lg:grid-cols-2 place-items-center pt-16 pb-12 md:pt-12 md:pb-20 gap-10">
+  <div class="w-full max-w-lg order-2 lg:order-1">
+    <div class="rounded-2xl border border-violet-200 bg-gradient-to-br from-slate-950 to-violet-950 shadow-xl p-8 text-center">
+      <div class="text-violet-200 text-7xl mb-5">☾</div>
+      <p class="text-violet-300 text-sm tracking-widest mb-3">SORAMUNE</p>
+      <h2 class="text-white text-2xl font-semibold">เซียมซีออนไลน์</h2>
+      <p class="text-violet-200 mt-3 leading-relaxed">
+        ตั้งจิตให้สงบ นึกถึงสิ่งที่อยากรู้
+        <br />
+        แล้วเปิดรับคำทำนายของคุณ
+      </p>
+      <div class="mt-6 flex justify-center gap-3 text-violet-300 text-xl">
+        <Icon name="bx:moon" />
+        <Icon name="bx:star" />
+        <Icon name="bx:star" />
+      </div>
+    </div>
+  </div>
+
+  <div class="order-1 lg:order-2">
+    <div class="mb-4">
+      <span class="inline-flex items-center gap-2 rounded-full border border-violet-200 bg-violet-50 px-3 py-1 text-sm text-violet-700">
+        <Icon class="w-4 h-4" name="bx:moon" />
+        ค้นหาคำทำนายของคุณ
+      </span>
+    </div>
+
+    <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
+      ให้โชคชะตา
+      <span class="text-primary">นำทาง</span>
+      คุณ
+    </h1>
+
+    <p class="text-lg mt-4 text-slate-600 max-w-xl">
+      พักใจสักครู่ แล้วลองเสี่ยงเซียมซีออนไลน์
+      ค้นหาคำทำนายและข้อคิดที่อาจช่วยให้คุณมองเห็นเส้นทางข้างหน้า
+    </p>
+
+    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <button
+        id="draw-fortune"
+        type="button"
+        class="inline-flex items-center justify-center gap-2 rounded-lg bg-violet-700 px-6 py-3 text-white font-semibold hover:bg-violet-800 transition"
+      >
+        <Icon class="w-5 h-5" name="bx:leaf" />
+        เสี่ยงเซียมซีเลย
+      </button>
+
+      <a
+        href="#features"
+        class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-6 py-3 text-slate-700 font-semibold hover:bg-slate-50 transition"
+      >
+        <Icon class="w-5 h-5" name="bx:compass" />
+        สำรวจคำทำนาย
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Fortune Popup -->
+<div
+  id="fortune-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/70 backdrop-blur-sm p-4"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="fortune-title"
+>
+  <div class="fortune-box relative w-full max-w-md rounded-3xl border border-violet-200 bg-gradient-to-b from-white to-violet-50 p-6 sm:p-8 text-center shadow-2xl">
+    <button
+      id="close-fortune"
+      type="button"
+      class="absolute right-4 top-4 rounded-full p-2 text-slate-400 hover:bg-violet-100 hover:text-violet-800 transition"
+      aria-label="ปิดหน้าต่าง"
+    >
+      <Icon name="bx:x" size="24" />
+    </button>
+
+    <p class="text-xs font-semibold tracking-[0.3em] text-violet-500">
+      SORAMUNE
+    </p>
+    <h2 id="fortune-title" class="mt-2 text-2xl font-bold text-violet-950">
+      เสี่ยงเซียมซี
+    </h2>
+    <p id="fortune-message" class="mt-2 text-sm text-slate-500">
+      ตั้งจิตอธิษฐาน แล้วรอรับคำทำนาย
+    </p>
+
+    <div id="shaking-area" class="relative mx-auto mt-6 flex h-48 items-center justify-center">
+      <div id="fortune-container" class="fortune-container relative flex h-40 w-32 items-center justify-center rounded-t-[2.5rem] rounded-b-2xl border-4 border-amber-700 bg-gradient-to-r from-amber-800 via-amber-500 to-amber-800 shadow-lg">
+        <div class="absolute inset-x-2 top-3 h-3 rounded-full bg-amber-950/30"></div>
+        <div class="absolute inset-x-2 bottom-3 h-3 rounded-full bg-amber-950/30"></div>
+        <div class="flex h-24 w-20 items-center justify-center rounded-full border border-amber-900/30 bg-amber-100/90">
+          <span class="text-3xl text-red-700">籤</span>
+        </div>
+        <div class="absolute -top-4 left-1/2 h-8 w-2 -translate-x-1/2 rounded-full bg-amber-300"></div>
+      </div>
+
+      <div id="fortune-stick" class="absolute hidden h-32 w-5 -translate-y-12 rounded-t-md rounded-b-sm border border-amber-800 bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-300 shadow-md">
+        <span class="absolute inset-x-0 top-5 text-center text-xs font-bold text-red-700">籤</span>
+      </div>
+    </div>
+
+    <div id="fortune-result" class="hidden rounded-2xl border border-violet-200 bg-white p-5 text-left shadow-sm">
+      <p id="fortune-number" class="text-sm font-semibold text-violet-600"></p>
+      <p id="fortune-text" class="mt-2 leading-7 text-slate-700"></p>
+    </div>
+
+    <button
+      id="shake-again"
+      type="button"
+      class="mt-5 w-full rounded-xl bg-violet-700 px-5 py-3 font-semibold text-white hover:bg-violet-800 transition"
+    >
+      เขย่าเซียมซี
+    </button>
+  </div>
+</div>
+
+<script>
+  const drawButton = document.querySelector("#draw-fortune");
+  const modal = document.querySelector("#fortune-modal");
+  const closeButton = document.querySelector("#close-fortune");
+  const shakeButton = document.querySelector("#shake-again");
+  const container = document.querySelector("#fortune-container");
+  const stick = document.querySelector("#fortune-stick");
+  const message = document.querySelector("#fortune-message");
+  const result = document.querySelector("#fortune-result");
+  const number = document.querySelector("#fortune-number");
+  const text = document.querySelector("#fortune-text");
+
+  const fortunes = [
+    { title: "ใบที่ 1", text: "การงาน: สิ่งที่ตั้งใจไว้มีโอกาสก้าวหน้า ขอเพียงอย่าใจร้อน" },
+    { title: "ใบที่ 2", text: "การเงิน: ควรวางแผนการใช้จ่ายให้รอบคอบ แล้วโอกาสดีจะตามมา" },
+    { title: "ใบที่ 3", text: "ความรัก: เปิดใจรับฟังกันให้มากขึ้น ความสัมพันธ์จะค่อย ๆ ดีขึ้น" },
+    { title: "ใบที่ 4", text: "โชคลาภ: เหมาะกับการเริ่มต้นสิ่งใหม่ มากกว่าการเสี่ยงโดยไม่ไตร่ตรอง" },
+    { title: "ใบที่ 5", text: "สุขภาพ: อย่าลืมพักผ่อนและแบ่งเวลาให้ตัวเอง" },
+    { title: "ใบที่ 6", text: "ภาพรวม: อุปสรรคที่พบอาจเป็นโอกาสให้ได้เรียนรู้และเติบโต" }
+  ];
+
+  let animationTimer;
+  let isShaking = false;
+
+  function shakeFortune() {
+    if (isShaking || !modal || !container || !stick || !message || !result) return;
+
+    isShaking = true;
+    window.clearTimeout(animationTimer);
+
+    container.classList.remove("shake");
+    stick.classList.add("hidden");
+    result.classList.add("hidden");
+
+    if (shakeButton) {
+      shakeButton.disabled = true;
+      shakeButton.textContent = "กำลังเขย่า...";
+      shakeButton.classList.add("opacity-60");
+    }
+
+    if (message) message.textContent = "กำลังเขย่าเซียมซี...";
+
+    void container.offsetWidth;
+    container.classList.add("shake");
+
+    animationTimer = window.setTimeout(() => {
+      const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+
+      container.classList.remove("shake");
+      stick.classList.remove("hidden");
+      stick.classList.add("stick-rise");
+
+      if (number) number.textContent = fortune.title;
+      if (text) text.textContent = fortune.text;
+      if (message) message.textContent = "คำทำนายของคุณมาแล้ว";
+      result.classList.remove("hidden");
+
+      if (shakeButton) {
+        shakeButton.disabled = false;
+        shakeButton.textContent = "เสี่ยงเซียมซีอีกครั้ง";
+        shakeButton.classList.remove("opacity-60");
+      }
+
+      isShaking = false;
+    }, 1700);
+  }
+
+  function openModal() {
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    document.body.style.overflow = "hidden";
+    shakeFortune();
+  }
+
+  function closeModal() {
+    if (!modal || isShaking) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+    document.body.style.overflow = "";
+    container?.classList.remove("shake");
+    stick?.classList.remove("stick-rise");
+  }
+
+  drawButton?.addEventListener("click", openModal);
+  shakeButton?.addEventListener("click", shakeFortune);
+  closeButton?.addEventListener("click", closeModal);
+
+  modal?.addEventListener("click", (event) => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeModal();
+  });
+</script>
+
+<style>
+  .fortune-box {
+    animation: popup-in 0.3s ease-out both;
+  }
+
+  .fortune-container.shake {
+    animation: shake-container 0.16s ease-in-out infinite;
+  }
+
+  .stick-rise {
+    animation: stick-rise 0.5s ease-out both;
+  }
+
+  @keyframes popup-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes shake-container {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(-7deg) translateY(-3px); }
+    75% { transform: rotate(7deg) translateY(2px); }
+  }
+
+  @keyframes stick-rise {
+    from {
+      opacity: 0;
+      transform: translateY(35px) rotate(8deg);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(-48px) rotate(0deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fortune-box,
+    .fortune-container.shake,
+    .stick-rise {
+      animation-duration: 0.01ms;
+      animation-iteration-count: 1;
+    }
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+const {
+  title = "สินค้าและบริการแนะนำ",
+  description = "ตัวเลือกที่อาจเป็นประโยชน์สำหรับบ้านและคอนโด",
+  image = "",
+  link = "#",
+  category = "แนะนำ",
+} = Astro.props;
+---
+
+<div class="my-8">
+  <a
+    href={link}
+    target="_blank"
+    rel="nofollow sponsored noopener"
+    class="group flex flex-col sm:flex-row border border-gray-200 rounded-xl overflow-hidden bg-white hover:shadow-md transition"
+  >
+    {
+      image ? (
+        <img
+          src={image}
+          alt={title}
+          class="w-full sm:w-40 aspect-video sm:aspect-square object-cover"
+        />
+      ) : (
+        <div class="w-full sm:w-40 aspect-video sm:aspect-square bg-gray-100 flex items-center justify-center shrink-0">
+          <span class="text-xs text-gray-400">
+            Affiliate
+          </span>
+        </div>
+      )
+    }
+
+    <div class="p-5">
+      <span class="text-xs text-gray-400 uppercase tracking-wider">
+        {category}
+      </span>
+
+      <h3 class="font-semibold text-lg text-gray-800 mt-1 group-hover:text-gray-500 transition">
+        {title}
+      </h3>
+
+      <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+        {description}
+      </p>
+
+      <div class="text-sm font-medium text-gray-700 mt-3">
+        ดูรายละเอียด →
+      </div>
+    </div>
+  </a>
+</div>
